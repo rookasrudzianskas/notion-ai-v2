@@ -13,6 +13,7 @@ import { BlockNoteEditor } from "@blocknote/core";
 import { BlockNoteView } from "@blocknote/shadcn";
 import stringToColor from "@/lib/stringToColor";
 import TranslateDocument from "@/components/TranslateDocument";
+import ChatToDocument from "@/components/ChatToDocument";
 
 type EditorProps = {
   doc: Y.Doc;
@@ -64,7 +65,7 @@ const Editor = ({}) => {
       yProvider?.destroy();
     };
 
-  }, [room])
+  }, [room]);
 
   if(!doc || !provider) return null;
 
@@ -77,6 +78,7 @@ const Editor = ({}) => {
     <div className={'max-w-6xl mx-auto'}>
       <div className={'flex items-center gap-2 justify-end mb-10'}>
         <TranslateDocument doc={doc} />
+        <ChatToDocument doc={doc} />
 
         <Button className={style} onClick={() => setDarkMode(!darkMode)}>
           {darkMode ? <SunIcon /> : <MoonIcon />}
