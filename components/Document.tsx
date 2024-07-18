@@ -9,6 +9,7 @@ import {useDocumentData} from "react-firebase-hooks/firestore";
 import useOwner from "@/hooks/useOwner";
 import Editor from "@/components/Editor";
 import DeleteDocument from "@/components/DeleteDocument";
+import InviteUser from "@/components/InviteUser";
 
 const Document = ({ id }: { id: string}) => {
   const [input, setInput] = useState('');
@@ -50,6 +51,7 @@ const Document = ({ id }: { id: string}) => {
 
           {isOwner && (
             <>
+              <InviteUser />
               <DeleteDocument />
             </>
           )}
