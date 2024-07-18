@@ -1,11 +1,50 @@
 "use client";
 
 import React, {useEffect, useState} from 'react';
-import {useRoom} from "@liveblocks/react/suspense";
+import {useRoom, useSelf} from "@liveblocks/react/suspense";
 import * as Y from "yjs";
 import {LiveblocksYjsProvider} from "@liveblocks/yjs";
 import {Button} from "@/components/ui/button";
 import {MoonIcon, SunIcon} from "lucide-react";
+import { useCreateBlockNote } from "@blocknote/react";
+import "@blocknote/core/fonts/inter.css";
+import "@blocknote/shadcn/style.css";
+import { BlockNoteEditor } from "@blocknote/core";
+import { BlockNoteView } from "@blocknote/shadcn";
+import stringToColor from "@/lib/stringToColor";
+
+type EditorProps = {
+  doc: Y.Doc;
+  provider: any;
+  darkMode: boolean;
+};
+
+function BlockNode({doc, provider, darkMode}: EditorProps) {
+  const userInfo = useSelf((me) => me.info);
+
+  const editor: BlockNoteEditor = useCreateBlockNote({
+    collaboration: {
+      provider,
+
+      fragment: doc.getXmlFragment('document-store'),
+
+      user: {
+        name: userInfo?.name,
+        color: stringToColor(userInfo?.email || '1'),
+      }
+    }
+  });
+
+  return (
+    <div className={'relative max-w-6xl mx-auto'}>
+      <BlockNoteView
+        editor={editor}
+        theme={darkMode ? "dark" : "light"}
+        className={'min-h-screen'}
+      />
+    </div>
+  )
+}
 
 const Editor = ({}) => {
   const room = useRoom();
@@ -41,7 +80,7 @@ const Editor = ({}) => {
           {darkMode ? <SunIcon /> : <MoonIcon />}
         </Button>
       </div>
-      {/*<BlockNote />*/}
+      <BlockNote doc={doc} provider={provider} darkMode={darkMode} />
     </div>
   );
 };
