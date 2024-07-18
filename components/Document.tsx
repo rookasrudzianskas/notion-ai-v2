@@ -8,6 +8,7 @@ import {db} from "@/firebase";
 import {useDocumentData} from "react-firebase-hooks/firestore";
 import useOwner from "@/hooks/useOwner";
 import Editor from "@/components/Editor";
+import DeleteDocument from "@/components/DeleteDocument";
 
 const Document = ({ id }: { id: string}) => {
   const [input, setInput] = useState('');
@@ -33,7 +34,7 @@ const Document = ({ id }: { id: string}) => {
   };
 
   return (
-    <div>
+    <div className={'flex-1 h-full bg-white p-5'}>
       <div className={'flex max-w-6xl mx-auto justify-between'}>
         <form className={'flex space-x-2 flex-1'} onSubmit={updateTitle}>
           <Input
@@ -46,6 +47,12 @@ const Document = ({ id }: { id: string}) => {
           >
             {isUpdating ? 'Updating...' : 'Update'}
           </Button>
+
+          {isOwner && (
+            <>
+              <DeleteDocument />
+            </>
+          )}
         </form>
       </div>
       <div>
