@@ -17,9 +17,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {LanguagesIcon} from "lucide-react";
+import {BotIcon, LanguagesIcon} from "lucide-react";
 import {toast} from "sonner";
-
+import Markdown from "react-markdown";
 
 type Language =
   | "english"
@@ -100,6 +100,18 @@ const TranslateDocument = ({doc}: { doc: Y.Doc }) => {
           <hr className={'mt-5'} />
           {question && <p className={'mt-5 text-gray-500'}>Q: {question}</p>}
         </DialogHeader>
+
+        {summary && (
+          <div className={'flex flex-col items-start max-h-96 overflow-y-scroll gap-2 p-5 bg-gray-100'}>
+            <div className={'flex'}>
+              <BotIcon className={'w-10 flex-shrink-0'} />
+              <p className={'font-bold'}>
+                GPT {isPending ? "is translating..." : "translated"}
+              </p>
+            </div>
+            <p>{isPending ? "Translating..." : <Markdown>summary</Markdown>}</p>
+          </div>
+        )}
 
         <form className={'flex gap-2'} onSubmit={handleAskQuestion}>
           <Select
