@@ -16,6 +16,8 @@ import useOwner from "@/hooks/useOwner";
 import {useCollection} from "react-firebase-hooks/firestore";
 import {collectionGroup, query, where} from "@firebase/firestore";
 import {db} from "@/firebase";
+import {toast} from "sonner";
+import {removeUserFromDocument} from "@/actions/actions";
 
 const ManageUsers = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +31,17 @@ const ManageUsers = ({}) => {
   );
 
   const handleDelete = async (userId: string) => {
+    startTransition(async () => {
+      if(!user) return;
 
+      const { success } = await removeUserFromDocument(room.id, userId);
+
+      if(success) {
+        toast.success('User removed from document');
+      } else {
+        toast.error('Failed to remove user from document');
+      }
+    });
   };
 
   return (

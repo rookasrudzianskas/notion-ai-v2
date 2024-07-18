@@ -80,3 +80,26 @@ export async function inviteUserToDocument(roomId: string, email: string) {
     }
   }
 }
+
+export const removeUserFromDocument = async (roomId: string, email: string) => {
+  auth().protect();
+
+  console.log(roomId, email);
+
+  try {
+    await adminDb
+      .collection("uses")
+      .doc(email)
+      .collection("rooms")
+      .doc(roomId)
+      .delete();
+
+    return {
+      success: true,
+    }
+  } catch (error) {
+    return {
+      success: false,
+    }
+  }
+}
