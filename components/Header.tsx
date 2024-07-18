@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {SignedIn, SignedOut, SignInButton, UserButton, useUser} from "@clerk/nextjs";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const Header = ({}) => {
   const { user } = useUser();
@@ -12,7 +13,7 @@ const Header = ({}) => {
         <h1 className={'text-2xl'}>{user?.firstName}{`'s`} Space</h1>
       )}
 
-      {/* Breadcrumbs */}
+      <Breadcrumbs />
 
       <div>
         <SignedOut>
