@@ -706,6 +706,16 @@
   resolved "https://registry.yarnpkg.com/@liveblocks/core/-/core-2.3.0.tgz#b1e57225629c131d59cbd60d45317f286adcc74c"
   integrity sha512-GhP5Dwvyaqk5/fKFeg4j741NwzCFDXlDlSTUt3MCa593Rw2c1+or20Uq4o3FlEJMfre3+ngG5Rsk2Wl0g/Wbjw==
 
+"@liveblocks/node@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@liveblocks/node/-/node-2.3.0.tgz#36cc83c24b72f214bf5e0c4c7918694a21e20196"
+  integrity sha512-QSLgU+Ma6rfq2JeCk5rNBAdOsXx6JSlW5LGfJAkYew8iZyVzLtd2K8icll4K9mVeHwyqfcT6yXIAyOEFB6cpKA==
+  dependencies:
+    "@liveblocks/core" "2.3.0"
+    "@stablelib/base64" "^1.0.1"
+    fast-sha256 "^1.3.0"
+    node-fetch "^2.6.1"
+
 "@liveblocks/react@^2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@liveblocks/react/-/react-2.3.0.tgz#691454ba08e181881074226cb818e31adddd2f24"
@@ -1006,6 +1016,11 @@
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@remirror/core-constants/-/core-constants-2.0.2.tgz#f05eccdc69e3a65e7d524b52548f567904a11a1a"
   integrity sha512-dyHY+sMF0ihPus3O27ODd4+agdHMEmuRdyiZJ2CCWjPV5UFmn17ZbElvk6WOGVE4rdCJKZQCrPV2BcikOMLUGQ==
+
+"@stablelib/base64@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@stablelib/base64/-/base64-1.0.1.tgz#bdfc1c6d3a62d7a3b7bbc65b6cce1bb4561641be"
+  integrity sha512-1bnPQqSxSuc3Ii6MhBysoWCg58j97aUjuCSZrGSmDxNqtytIi0k8utUenAwTZN4V5mXXYGsVUI9zeBqy+jBOSQ==
 
 "@swc/counter@^0.1.3":
   version "0.1.3"
@@ -1790,6 +1805,11 @@ fast-glob@^3.3.0:
     glob-parent "^5.1.2"
     merge2 "^1.3.0"
     micromatch "^4.0.4"
+
+fast-sha256@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/fast-sha256/-/fast-sha256-1.3.0.tgz#7916ba2054eeb255982608cccd0f6660c79b7ae6"
+  integrity sha512-n11RGP/lrWEFI/bWdygLxhI+pVeo1ZYIVwvvPkW7azl/rOy+F3HYRZ2K5zeE9mmkhQppyv9sQFx0JM9UabnpPQ==
 
 fast-xml-parser@^4.3.0:
   version "4.4.0"

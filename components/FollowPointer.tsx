@@ -1,5 +1,6 @@
 import React from 'react';
 import stringToColor from "@/lib/stringToColor";
+import {motion} from "framer-motion";
 
 const FollowPointer = ({x, y, info}: { x: number, y: number, info: {
   name: string;
@@ -43,6 +44,26 @@ const FollowPointer = ({x, y, info}: { x: number, y: number, info: {
 
           </path>
         </svg>
+          <motion.div
+            style={{
+              backgroundColor: color,
+            }}
+            initial={{
+              scale: 0.5,
+              opacity: 0,
+            }}
+            animate={{
+              scale: 1,
+              opacity: 1,
+            }}
+            exit={{
+              scale: 0.5,
+              opacity: 0,
+            }}
+            className={'px-2 py-2 bg-neutral-200 text-black font-bold whitespace-nowrap min-w-max text-xs rounded-full'}
+          >
+            {info?.name || info.email}
+          </motion.div>
       </motion.div>
     );
   };

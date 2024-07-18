@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { ClientSideSuspense, RoomProvider as RoomProviderWrapper } from "@liveblocks/react/suspense";
-import {LiveList, LiveObject} from "@liveblocks/core";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import LiveCursorProvider from "@/components/LiveCursorProvider";
 
 const RoomProvider = ({roomId, children}: { roomId: string, children: React.ReactNode }) => {
   return (
