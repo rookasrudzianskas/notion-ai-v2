@@ -92,7 +92,6 @@ const Sidebar = ({}) => {
             ))}
           </>
         )}
-      </div>
 
       {groupedData.editor.length > 0 && (
         <>
@@ -104,6 +103,7 @@ const Sidebar = ({}) => {
           ))}
         </>
       )}
+      </div>
     </>
   );
 
