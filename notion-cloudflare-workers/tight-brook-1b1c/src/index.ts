@@ -69,4 +69,4 @@ app.post('/translateDocument', async (c) => {
 	return new Response(JSON.stringify(response));
 });
 
-export default app;s
+export default app;
