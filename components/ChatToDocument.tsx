@@ -48,6 +48,8 @@ const ChatToDocument = ({doc}: { doc: Y.Doc }) => {
         setSummary(message);
 
         toast.success("Question asked successfully");
+      } else {
+        toast.error("Error asking question");
       }
     });
   };
