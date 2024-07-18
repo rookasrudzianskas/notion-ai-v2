@@ -14,6 +14,7 @@ import {deleteDoc, doc} from "@firebase/firestore";
 import {db} from "@/firebase";
 import {usePathname, useRouter} from "next/navigation";
 import {router} from "next/client";
+import {deleteDocument} from "@/actions/actions";
 
 const DeleteDocument = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,8 +36,7 @@ const DeleteDocument = ({}) => {
         toast.error("Something went wrong");
       }
     });
-    }
-  }
+    };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -69,7 +69,6 @@ const DeleteDocument = ({}) => {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-
   );
 };
 
