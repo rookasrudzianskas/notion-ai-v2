@@ -23,7 +23,7 @@ const Avatars = ({}) => {
           <TooltipProvider key={other.id + other.name}>
             <Tooltip>
               <TooltipTrigger>
-                <Avatar>
+                <Avatar className={'border-2 hover:z-50'}>
                   <AvatarImage src={other?.info.avatar} />
                   <AvatarFallback>{other?.info.name}</AvatarFallback>
                 </Avatar>
