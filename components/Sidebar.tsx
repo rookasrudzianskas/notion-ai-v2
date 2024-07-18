@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import NewDocumentButton from "@/components/NewDocumentButton";
 import {
   Sheet,
@@ -12,9 +12,10 @@ import {
 } from "@/components/ui/sheet"
 import {MenuIcon} from "lucide-react";
 import { useCollection } from 'react-firebase-hooks/firestore';
-import {useUser} from "@clerk/nextjs";
+import {useAuth, useUser} from "@clerk/nextjs";
 import {collectionGroup, DocumentData, query, where} from "@firebase/firestore";
 import {db} from "@/firebase";
+import SidebarOption from "@/components/SidebarOption";
 
 interface RoomDocument extends DocumentData {
   createdAt: string;
@@ -24,8 +25,15 @@ interface RoomDocument extends DocumentData {
 }
 
 const Sidebar = ({}) => {
-  const user = useUser();
-  console.log(user);
+  const {user} = useUser();
+  const [groupedData, setGroupedData] = useState<{
+    owner: RoomDocument[];
+    editor: RoomDocument[];
+  }>({
+    owner: [],
+    editor: [],
+  });
+
   const [data, loading, error] = useCollection(
     user &&
       query(
@@ -47,6 +55,7 @@ const Sidebar = ({}) => {
             id: curr.id,
             ...roomData,
           });
+
         } else {
           acc.editor.push({
             id: curr.id,
@@ -59,14 +68,42 @@ const Sidebar = ({}) => {
         editor: [],
       }
     )
-  }, [data])
+
+    setGroupedData(grouped);
+  }, [data]);
+
 
   const menuOptions = (
     <>
       <NewDocumentButton />
-      {/*   My documents */}
-      {/*   Shared with me */}
-      {/*  Shared with me */}
+
+      <div className={'flex py-4 flex-col space-y-4 md:max-w-36'}>
+        {groupedData.owner.length === 0 ? (
+          <h2 className={'text-gray-500 font-semibold text-sm'}>
+            No documents found
+          </h2>
+        ) : (
+          <>
+            <h2 className={'text-gray-500 font-semibold text-sm'}>
+              My documents
+            </h2>
+            {groupedData.owner.map((doc) => (
+              <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`} />
+            ))}
+          </>
+        )}
+      </div>
+
+      {groupedData.editor.length > 0 && (
+        <>
+          <h2 className={'text-gray-500 font-semibold text-sm'}>
+            Shared with me
+          </h2>
+          {groupedData.editor.map((doc) => (
+            <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`} />
+          ))}
+        </>
+      )}
     </>
   );
 
