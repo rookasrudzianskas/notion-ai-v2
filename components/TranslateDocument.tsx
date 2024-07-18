@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import {LanguagesIcon} from "lucide-react";
+import {toast} from "sonner";
 
 
 type Language =
@@ -54,6 +55,30 @@ const TranslateDocument = ({doc}: { doc: Y.Doc }) => {
 
   const handleAskQuestion = async (e: FormEvent) => {
     e.preventDefault();
+
+    startTransition(async () => {
+      const documentData = doc.get("document-store").toJSON();
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/translateDocument`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            document: documentData,
+            targetLang: language,
+          }),
+        }
+      );
+      if(res.ok) {
+        const id = toast.loading("Translating document...");
+        const { translatedText } = await res.json();
+        setSummary(translatedText);
+        toast.success("Translated Summary succesffully!", {
+          id,
+        });
+      }
+    });
   }
 
   return (
