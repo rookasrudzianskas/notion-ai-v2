@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import {LanguagesIcon} from "lucide-react";
 
 
 type Language =
@@ -58,15 +59,21 @@ const TranslateDocument = ({doc}: { doc: Y.Doc }) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <Button asChild variant={'outline'}>
-        <DialogTrigger>Invite</DialogTrigger>
+        <DialogTrigger>
+          <LanguagesIcon />
+          Translate
+        </DialogTrigger>
       </Button>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Invite User</DialogTitle>
+          <DialogTitle>Translate Document</DialogTitle>
           <DialogDescription>
-            Enter the email address of the user you want to invite. You can
-            invite multiple users by separating them with a comma.
+            Translate the document into your preferred language. You can
+            translate multiple documents at once by separating them with a comma.
           </DialogDescription>
+
+          <hr className={'mt-5'} />
+          {question && <p className={'mt-5 text-gray-500'}>Q: {question}</p>}
         </DialogHeader>
 
         <form className={'flex gap-2'} onSubmit={handleAskQuestion}>
@@ -78,9 +85,9 @@ const TranslateDocument = ({doc}: { doc: Y.Doc }) => {
               <SelectValue placeholder="Select a language" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
+              {languages.map((lang) => (
+                <SelectItem key={lang} value={lang}>{lang}</SelectItem>
+              ))}
             </SelectContent>
           </Select>
 
