@@ -27,6 +27,29 @@ const ChatToDocument = ({doc}: { doc: Y.Doc }) => {
   const handleAskQuestion = async (e: FormEvent) => {
     e.preventDefault();
 
+    setQuestion(input);
+    startTransition(async () => {
+      const documentData = doc.get("document-store").toJSON();
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/chatToDocument`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            documentData,
+            question: input,
+          }),
+        })
+
+      if (res.ok) {
+        const { message } = await res.json();
+        setInput("");
+        setSummary(message);
+
+        toast.success("Question asked successfully");
+      }
+    });
   };
 
   return (
@@ -43,6 +66,8 @@ const ChatToDocument = ({doc}: { doc: Y.Doc }) => {
           <DialogDescription>
             Ask the document a question and get a response from the AI. You can ask multiple questions at once by separating them with a comma.
           </DialogDescription>
+          <hr className={'border-gray-200'} />
+          {question && <p className={'mt-5 text-gray-500'}>Q: {question}</p>}
         </DialogHeader>
 
         {summary && (
