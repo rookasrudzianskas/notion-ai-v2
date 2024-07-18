@@ -10,11 +10,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import {Button} from "@/components/ui/button";
-import {deleteDoc, doc} from "@firebase/firestore";
-import {db} from "@/firebase";
 import {usePathname, useRouter} from "next/navigation";
-import {router} from "next/client";
 import {deleteDocument} from "@/actions/actions";
+import { toast } from "sonner"
 
 const DeleteDocument = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
