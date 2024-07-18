@@ -7,6 +7,7 @@ import {doc, updateDoc} from "@firebase/firestore";
 import {db} from "@/firebase";
 import {useDocumentData} from "react-firebase-hooks/firestore";
 import useOwner from "@/hooks/useOwner";
+import Editor from "@/components/Editor";
 
 const Document = ({ id }: { id: string}) => {
   const [input, setInput] = useState('');
@@ -50,7 +51,9 @@ const Document = ({ id }: { id: string}) => {
       <div>
 
       </div>
-      {/*  Collaborative editor here */}
+
+      <hr className={'pb-10'} />
+      <Editor />
     </div>
   );
 };
