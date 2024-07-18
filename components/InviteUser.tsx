@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog"
 import {Button} from "@/components/ui/button";
 import {usePathname, useRouter} from "next/navigation";
-import {deleteDocument} from "@/actions/actions";
+import {deleteDocument, inviteUserToDocument} from "@/actions/actions";
 import { toast } from "sonner"
 import {Input} from "@/components/ui/input";
 
@@ -74,7 +74,7 @@ const InviteUser = ({}) => {
           <Button
             type={'button'}
             variant={'destructive'}
-            onClick={handleDelete}
+            onClick={handleInvite}
             disabled={isPending}
           >
             {isPending ? 'Deleting...' : 'Delete'}

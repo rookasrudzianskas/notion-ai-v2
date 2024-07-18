@@ -10,6 +10,7 @@ import useOwner from "@/hooks/useOwner";
 import Editor from "@/components/Editor";
 import DeleteDocument from "@/components/DeleteDocument";
 import InviteUser from "@/components/InviteUser";
+import ManageUsers from "@/components/ManageUsers";
 
 const Document = ({ id }: { id: string}) => {
   const [input, setInput] = useState('');
@@ -57,8 +58,8 @@ const Document = ({ id }: { id: string}) => {
           )}
         </form>
       </div>
-      <div>
-
+      <div className={'flex max-w-6xl mx-auto justify-between items-center mb-5'}>
+        <ManageUsers />
       </div>
 
       <hr className={'pb-10'} />
